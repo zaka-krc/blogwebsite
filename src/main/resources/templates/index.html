@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en " xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blogs</title>
+</head>
+<body>
+    <h1>Blogs</h1>
+    <form method="POST" th:action="@{/index}" th:object="${blogForForm}">
+        <span id="usernameLabel">username</span>
+        <input id="username" type="text" th:field="*{username}">
+        <br/>
+        <span id="contentLabel">content</span>
+        <textarea id="content" type="text" th:field="*{content}">
+        </textarea>
+            <br/>
+        <span th:if="${#fields.hasErrors()}"
+              th:text="${#fields.error()}">
+        </span>
+        <button type="submit">Create Blog</button>
+    </form>
+<div id="blog_container" th:each="blog : ${all_blogs}">
+    <div class="blog">
+        <h2 th:text="${blog.username}"></h2>
+        <h3 th:text="${blog.postDate}"></h3>
+        <p th:text="${blog.content}"></p>
+    </div>
+
+</div>
+</body>
+</html>
